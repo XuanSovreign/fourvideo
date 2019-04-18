@@ -6,12 +6,12 @@
     <EditText
         android:id="@+id/et_ip"
         android:layout_width="match_parent"
+        android:hint="请输入IP地址"
         android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btn_connection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="请输入IP地址"
         android:text="连接"/>
 </LinearLayout>
