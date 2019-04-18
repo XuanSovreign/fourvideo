@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@mipmap/bg"
+    tools:context="com.space.videospeed.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_one"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:background="@mipmap/video_bg">
+        <VideoView
+            android:id="@+id/video"
+            android:layout_width="300dp"
+            android:visibility="invisible"
+            android:layout_height="150dp" />
+        <ImageView
+            android:id="@+id/iv_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/video_play"/>
+
+        <ImageView
+            android:id="@+id/iv_shrink_one"
+            android:src="@mipmap/video_shrink"
+            style="@style/image_play" />
+        <LinearLayout
+            android:id="@+id/ll_one"
+            style="@style/text_download">
+            <TextView
+                android:id="@+id/tv_length_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:id="@+id/tv_speed_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_two"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_toRightOf="@id/rl_one"
+        android:background="@mipmap/video_bg">
+        <VideoView
+            android:id="@+id/video2"
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:id="@+id/iv_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/video_play"/>
+        <ImageView
+            android:id="@+id/iv_shrink_two"
+            android:src="@mipmap/video_shrink"
+            style="@style/image_play" />
+        <LinearLayout
+            android:id="@+id/ll_two"
+            style="@style/text_download">
+            <TextView
+                android:id="@+id/tv_length_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:id="@+id/tv_speed_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_three"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/rl_one"
+        android:background="@mipmap/video_bg">
+        <VideoView
+            android:id="@+id/video3"
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:visibility="invisible"/>
+        <ImageView
+            android:id="@+id/iv_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/video_play"/>
+        <ImageView
+            android:id="@+id/iv_shrink_three"
+            android:src="@mipmap/video_shrink"
+            style="@style/image_play" />
+        <LinearLayout
+            android:id="@+id/ll_three"
+            style="@style/text_download">
+            <TextView
+                android:id="@+id/tv_length_three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:id="@+id/tv_speed_thee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_four"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_toRightOf="@id/rl_three"
+        android:background="@mipmap/video_bg"
+        android:layout_below="@id/rl_two">
+        <VideoView
+            android:id="@+id/video4"
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:visibility="invisible"/>
+        <ImageView
+            android:id="@+id/iv_four"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/video_play"/>
+        <ImageView
+            android:id="@+id/iv_shrink_four"
+            android:src="@mipmap/video_shrink"
+            style="@style/image_play" />
+        <LinearLayout
+            android:id="@+id/ll_four"
+            style="@style/text_download">
+            <TextView
+                android:id="@+id/tv_length_four"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:id="@+id/tv_speed_four"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_big"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+        <VideoView
+            android:id="@+id/video_big"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            />
+        <ImageView
+            android:id="@+id/iv_shrink"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/video_shrink"
+            />
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
