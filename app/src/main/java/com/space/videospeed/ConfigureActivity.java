@@ -62,7 +62,7 @@ public class ConfigureActivity extends Activity {
     }
 
     private void gotoVideo(String ip) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, HWVideoActivity.class);
         intent.putExtra(Constants.HTTP_URL,ip);
         startActivity(intent);
     }

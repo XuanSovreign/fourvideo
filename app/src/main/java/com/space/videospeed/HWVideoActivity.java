@@ -3,11 +3,12 @@ package com.space.videospeed;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Build;
-import android.os.Handler;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -33,7 +34,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class HWVideoActivity extends Activity implements View.OnClickListener {
 
     private VideoView mVideo;
     private VideoView mVideo2;
@@ -70,15 +71,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private int seekTime;
     private List<RelativeLayout> mLayouts;
     private Retrofit mRetrofit;
-    private Handler mHandler = new Handler(){
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
                     break;
                 case 1:
-                    File video= (File) msg.obj;
-                    Log.e("path", "handleMessage: "+video.getAbsolutePath() );
+                    File video = (File) msg.obj;
+                    Log.e("path", "handleMessage: " + video.getAbsolutePath());
                     mHandler.removeCallbacks(task);
                     mVideoViews.get(index).setVideoPath(video.getAbsolutePath());
                     mVideoViews.get(index).setVisibility(View.VISIBLE);
@@ -88,11 +89,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     startTime = System.currentTimeMillis();
                     mVideoViews.get(index).requestFocus();
                     mVideoViews.get(index).start();
-                    startTime=System.currentTimeMillis();
-                    seekTime=0;
+                    startTime = System.currentTimeMillis();
+                    seekTime = 0;
                     break;
                 case 2:
-                    Toast.makeText(MainActivity.this,"文件出错了",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HWVideoActivity.this, "文件出错了", Toast.LENGTH_SHORT).show();
                     break;
             }
         }
@@ -106,7 +107,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         //全屏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_video);
         initView();
         initData();
         initListener();
@@ -195,10 +196,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
         });
         checkPermissions();
-        mRetrofit = new Retrofit.Builder().baseUrl("http://"+http_url+":8080/video/").build();
+        mRetrofit = new Retrofit.Builder().baseUrl("http://" + http_url + ":8080/video/").build();
     }
 
     private String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE,};
+
     private void checkPermissions() {
         try {
             if (Build.VERSION.SDK_INT >= 23) {
@@ -229,7 +231,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     protected void onStop() {
         super.onStop();
         if (startTime > 0) {
-            seekTime= (int) (System.currentTimeMillis()-startTime);
+            seekTime = (int) (System.currentTimeMillis() - startTime);
 //            Log.e("ddddddd", "onStart: "+seekTime );
         }
     }
@@ -262,7 +264,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
             mVideoViews.get(i).setOnPreparedListener(preListener);
             mVideoViews.get(i).setOnCompletionListener(listener);
         }
-
 
 
         /**
@@ -339,14 +340,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
                         mTextLengthViews.get(finalJ).setVisibility(View.VISIBLE);
                         mTextSpeedViews.get(finalJ).setVisibility(View.VISIBLE);
                         long total = response.body().contentLength() / 1024 / 1024;
-                        String str=null;
+                        String str = null;
                         if (total > 1024) {
-                            str = String.valueOf("文件大小：" + Math.floor(total/1024.0) + "GB");
+                            str = String.valueOf("文件大小：" + Math.floor(total / 1024.0) + "GB");
                         } else {
                             str = String.valueOf("文件大小：" + total + "MB");
                         }
                         mTextLengthViews.get(finalJ).setText(str);
-                        new Thread(){
+                        new Thread() {
                             @Override
                             public void run() {
                                 super.run();
@@ -367,8 +368,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                                     @Override
                                     public void onFinished() {
                                         Message message = Message.obtain();
-                                        message.what=1;
-                                        message.obj=file;
+                                        message.what = 1;
+                                        message.obj = file;
                                         mHandler.sendMessage(message);
                                     }
                                 });
@@ -378,7 +379,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Log.e("aaaaaaaaa", "onFailure: "+t.getMessage() );
+                        Log.e("aaaaaaaaa", "onFailure: " + t.getMessage());
                     }
                 });
 
@@ -418,12 +419,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
         ViewGroup.LayoutParams params = mLayouts.get(index).getLayoutParams();
         ViewGroup.LayoutParams videoParams = mVideoViews.get(index).getLayoutParams();
         if (b) {
-            params.width = getWindowManager().getDefaultDisplay().getWidth();
-            params.height = getWindowManager().getDefaultDisplay().getHeight();
+            params.width = getWindowManager().getDefaultDisplay().getHeight();
+            params.height = getWindowManager().getDefaultDisplay().getWidth();
             videoParams.width = params.width;
             videoParams.height = params.height;
             mImageShrinkViews.get(index).setVisibility(View.VISIBLE);
             mVideoViews.get(index).setEnabled(false);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         } else {
             params.width = mWidth;
             params.height = mHeight;
@@ -431,7 +433,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             videoParams.height = params.height;
             mVideoViews.get(index).setEnabled(true);
             mImageShrinkViews.get(index).setVisibility(View.GONE);
-
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
         mLayouts.get(index).setLayoutParams(params);
         mVideoViews.get(index).setLayoutParams(videoParams);
